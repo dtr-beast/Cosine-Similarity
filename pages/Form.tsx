@@ -1,5 +1,5 @@
 import {FormEvent, useState} from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 // const randomSentence = require('random-sentence');
 // @ts-ignore
 import randomSentence from 'random-sentence';
@@ -16,78 +16,83 @@ import {IDFParams} from "./index";
 //     target: CustomEventTarget
 // }
 
-const Textarea = styled.textarea`
-  //border: 1px black solid;
-  //border-radius: 5px;
-  //align-self: center;
-  height: 200px;
-  font-size: 1.2em;
-  //width: 100%;
-  padding: 15px;
-`
+// const Textarea = styled.textarea`
+//   //border: 1px black solid;
+//   //border-radius: 5px;
+//   //align-self: center;
+//   height: 200px;
+//   font-size: 1.2em;
+//   //width: 100%;
+//   padding: 15px;
+// `
 
-const Button = styled.button`
-  //border-radius: 5px;
-  //margin: 10px;
-  //padding: 0 10px;
-  //background: blueviolet;
-  //font-size: 2em;
-  //text-align: center;
-`
+// const Button = styled.button`
+//   //border-radius: 5px;
+//   //margin: 10px;
+//   //padding: 0 10px;
+//   //background: blueviolet;
+//   //font-size: 2em;
+//   //text-align: center;
+// `
 
-const Label = styled.label`
-  font-size: 2.5em;
-`
+// const label = styled.label`
+//   font-size: 2.5em;
+// `
 interface Params {
     onSubmit: ({query, text1, text2, text3}: IDFParams) => void
 }
 export default function Form({onSubmit}: Params) {
     async function calculateSimilarity(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
+        console.log("Clicked")
         onSubmit({query, text1, text2, text3})
     }
     const [query, setQuery] = useState('')
     const [text1, setText1] = useState('')
     const [text2, setText2] = useState('')
     const [text3, setText3] = useState('')
-
+    function fill(){
+        setQuery('gold silver truck')
+        setText1('Shipment of gold damaged in a fire')
+        setText2('Delivery of silver arrived in a silver truck')
+        setText3('Shipment of gold arrived in a truck')
+    }
     return (
         <>
             <form onSubmit={calculateSimilarity}>
-
                 <div>
                     <div>
-                        <Label htmlFor="query" className="dark:text-white">Query *</Label>
-                        <button type="button" className={styles.button} onClick={() => setQuery(randomSentence({max: 10}))}>Randomize</button>
+                        <label className="dark:text-white">Query *</label>
+                        <button type="button" className={styles.button} onClick={fill}>Randomize</button>
                     </div>
                     <div className="text-center">
-                        <Textarea className="dark:bg-gray-800 w-1/2 border-8 border-blue-400 rounded-3xl" value={query} onChange={e => setQuery(e.target.value)} required/>
+                        <textarea className="dark:bg-gray-800 w-1/2 border-8 border-blue-400 rounded-3xl" value={query} onChange={e => setQuery(e.target.value)} required/>
                     </div>
                 </div>
                 <div>
                     <div>
-                        <Label htmlFor="document1">Document 1*</Label>
-                        <Button type="button" className="dark:text-white" onClick={() => setText1(randomSentence({min: 2, max: 10}))}>Randomize</Button>
+                        <label>Document 1*</label>
+                        <button type="button" className="dark:text-white" onClick={() => setText1(randomSentence({min: 2, max: 10}))}>Randomize</button>
                     </div>
-                    <Textarea className="bg-white dark:bg-gray-800 w-full" value={text1} onChange={e => setText1(e.target.value)} required/>
+                    <textarea className="bg-white dark:bg-gray-800 w-full" value={text1} onChange={e => setText1(e.target.value)} required/>
                 </div>
 
                 <div>
                     <div>
-                        <Label htmlFor="document2">Document 2</Label>
-                        <Button type="button" className="dark:text-white" onClick={() => setText2(randomSentence({min: 2, max: 10}))}>Randomize</Button>
+                        <label>Document 2</label>
+                        <button type="button" className="dark:text-white" onClick={() => setText2(randomSentence({min: 2, max: 10}))}>Randomize</button>
                     </div>
-                    <Textarea className="bg-white dark:bg-gray-800" value={text2} onChange={e => setText2(e.target.value)}/>
+                    <textarea className="bg-white dark:bg-gray-800" value={text2} onChange={e => setText2(e.target.value)}/>
                 </div>
                 <div>
                     <div>
-                        <Label htmlFor="document3">Document 3</Label>
-                        <Button type="button" className="dark:text-white" onClick={() => setText3(randomSentence({min: 2, max: 10}))}>Randomize</Button>
+                        <label>Document 3</label>
+                        <button type="button" className="dark:text-white" onClick={() => setText3(randomSentence({min: 2, max: 10}))}>Randomize</button>
                     </div>
-                    <Textarea className="bg-white dark:bg-gray-800" value={text3} onChange={e => setText3(e.target.value)}/>
+                    <textarea className="bg-white dark:bg-gray-800" value={text3} onChange={e => setText3(e.target.value)}/>
                 </div>
 
-                <Button type="submit" className="dark:text-white">Calculate</Button>
+                <button type="submit" className="dark:text-white">Calculate</button>
             </form>
         </>
     )
