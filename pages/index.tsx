@@ -354,7 +354,7 @@ export default function Home() {
                         <span className="ml-3 text-xl">Made with NextJS</span>
                     </a>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-                        <a className="ml-3 text-gray-400" target="_blank" rel="noreferrer">
+                        <a className="ml-3 text-gray-400" target="_blank" rel="noreferrer" href="https://github.com/dtr-beast/Cosine-Similarity">
                             <Image className="dark:text-gray-500" src="/github-light.png" width={48} height={48}
                                    alt="Github Logo"/>
                         </a>
