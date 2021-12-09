@@ -1,9 +1,9 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Form from "./Form";
 import React, {useState} from "react";
 import {useTheme} from 'next-themes'
 import {nanoid} from "nanoid";
+import styles from "../styles/Button.module.css"
 
 export interface IDFParams {
     query: string,
@@ -13,6 +13,7 @@ export interface IDFParams {
 }
 
 function displayText(text: string) {
+    // TODO: Add read more
     if (text.length > 50) {
         return `${text.substring(0, 47)}...`
     }
@@ -35,7 +36,6 @@ export default function Home() {
     const [inverseDocumentFrequency, setInverseDocumentFrequency] = useState<React.ReactNode>(undefined)
     const [vectorGeneration, setVectorGeneration] = useState<React.ReactNode>(undefined)
     const [similarityCalculations, setSimilarityCalculations] = useState<React.ReactNode>(undefined)
-    // const [similarityResult, setSimilarityResult] = useState<React.ReactNode>(undefined)
 
     function calculateCosineSimilarity(query: string, text1: string, text2: string, text3: string) {
         wordFrequencies = {0: {}, 1: {}, 2: {}, 3: {}}
@@ -92,8 +92,8 @@ export default function Home() {
                 <div className="flex flex-col text-center w-full">
                     <h1 className="sm:text-5xl text-2xl font-medium title-font mb-4 text-gray-900">Word Frequency </h1>
                 </div>
-                <div className="flex flex-col text-center w-full">
-                    <table className="contentTable text-left ">
+                <div className="flex flex-col text-center w-full overflow-x-auto">
+                    <table className="contentTable text-left table-auto">
                         <thead>
                         <tr>
                             <th>
@@ -144,7 +144,7 @@ export default function Home() {
                     <h1 className="sm:text-5xl text-2xl font-medium title-font mb-4 text-gray-900">Inverse Document
                         Frequency </h1>
                 </div>
-                <div className="flex flex-col text-center w-full">
+                <div className="flex flex-col text-center w-full overflow-x-auto">
                     <table className="contentTable text-left ">
                         <thead>
                         <tr>
@@ -188,7 +188,7 @@ export default function Home() {
                 <div className="flex flex-col text-center w-full">
                     <h1 className="sm:text-5xl text-2xl font-medium title-font mb-4 text-gray-900">Document Vectors</h1>
                 </div>
-                <div className="flex flex-col text-center w-full">
+                <div className="flex flex-col text-center w-full overflow-x-auto">
                     <table className="contentTable text-left">
                         <thead>
                         <tr>
@@ -279,11 +279,6 @@ export default function Home() {
                 sc3CalcHTML.push(<span>{sc3Calc[j][0]} × {sc3Calc[j][1]} ({sc3Calc[j][2]}) + </span>)
             }
         }
-        // console.log(sc1Calc[0].props)
-        // console.log(sc1Calc[sc1Calc.length - 1].props.children.pop())
-        // console.log(sc1Calc[0].props)
-
-        // console.log(sc1Calc[sc1Calc.length - 1].props.remov)
         const sortedArr = [sc1, sc2, sc3].sort((a, b) => b[0] - a[0])
 
         const similarityCalculationHTML = <section className="container px-5 py-24 mx-auto text-center text-xl">
@@ -325,7 +320,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <section className="flex">
-                <h1 className="text-center text-6xl mb-12 pt-12 dark:text-white flex-grow">Cosine Similarity
+                <h1 className="text-center text-4xl lg:text-6xl mb-12 pt-12 dark:text-white flex-grow">Cosine Similarity
                     Calculator</h1>
                 {/*<button*/}
                 {/*    aria-label="Toggle Dark Mode"*/}
@@ -346,7 +341,6 @@ export default function Home() {
             <div className="m-2"/>
             {similarityCalculations}
             <div className="m-2"/>
-            {/*{similarityResult}*/}
             <footer className="text-gray-400 bg-gray-900 body-font">
                 <div className="container px-5 py-3 mx-auto flex items-center sm:flex-row flex-col">
                     <a className="flex title-font font-medium items-center md:justify-start justify-center text-white"
@@ -354,9 +348,8 @@ export default function Home() {
                         <span className="ml-3 text-xl">Made with NextJS</span>
                     </a>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-                        <a className="ml-3 text-gray-400" target="_blank" rel="noreferrer">
-                            <Image className="dark:text-gray-500" src="/github-light.png" width={48} height={48}
-                                   alt="Github Logo"/>
+                        <a className="ml-3 text-gray-400" target="_blank" rel="noreferrer" href="https://github.com/dtr-beast/Cosine-Similarity">
+                            <img src="/static/images/github-light.png" alt="GitHub Logo" width={48} height={48}/>
                         </a>
                     </span>
                 </div>
